@@ -3,9 +3,10 @@ from django.db import models
 from django.contrib import admin
 from unfold.admin import ModelAdmin
 
-class Category(models.Model):
+class Warehouse(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=150, blank=False, null=False)
+    address = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -13,12 +14,7 @@ class Category(models.Model):
         return self.name
 
     
-class CategoryAdmin(ModelAdmin):
+class WarehouseAdmin(ModelAdmin):
     list_display = ["id", "name", "created", "updated"]
     search_fields = ("name", )
-    ordering = ("created", ) 
-
-
-    
-
-    
+    ordering = ("created", )  
