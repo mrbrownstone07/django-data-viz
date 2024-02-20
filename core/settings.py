@@ -134,11 +134,11 @@ UNFOLD = {
     "STYLES": [
         lambda request: static("css/admin_style.css"),
     ],
+    "DASHBOARD_CALLBACK": "inventory.views.dashboard_callback",
     # "SCRIPTS": [
     #     lambda request: static("js/script.js"),
     # ],
-    "SIDEBAR": {
-        "DASHBOARD_CALLBACK": "inventory.views.dashboard_callback",
+    "SIDEBAR": { 
         "show_search": True,  # Search in applications and models names
         "show_all_applications": False,  # Dropdown with all applications and models
         "navigation": [
@@ -148,7 +148,7 @@ UNFOLD = {
                 "items": [
                     {
                         "title": _("Dashboard"),
-                        "icon": "view_list",  # Supported icon set: https://fonts.google.com/icons
+                        "icon": "dashboard",  # Supported icon set: https://fonts.google.com/icons
                         "link": reverse_lazy("admin:index"),
                         "permission": lambda request: request.user.is_superuser,
                     },
@@ -181,6 +181,12 @@ UNFOLD = {
                         "icon": "front_loader", # Supported icon set: https://fonts.google.
                         "link": reverse_lazy("admin:inventory_productinout_changelist"),
                         "permission": lambda request: request.user.is_staff,                        
+                    },
+                    {
+                        "title": _("Stock"),
+                        "icon": "front_loader", # Supported icon set: https://fonts.google.
+                        "link": reverse_lazy("admin:inventory_stock_changelist"),
+                        "permission": lambda request: request.user.is_staff,                        
                     }
                 ],
             },
@@ -196,26 +202,6 @@ UNFOLD = {
                     },
                 ],
             },
-        ]
-        # "TABS": [
-        #     {
-        #         "models": [
-        #             "inventory.category",
-        #             "inventory.item",
-        #         ],
-        #         "items": [
-        #             {
-        #                 "title": _("Categories"),
-        #                 "link": reverse_lazy("admin:inventory_category_changelist"),
-        #                 "permission": lambda request: request.user.is_superuser,
-        #             },
-        #             {
-        #                 "title": _("Items"),
-        #                 "link": reverse_lazy("admin:inventory_item_changelist"),
-        #                 "permission": lambda request: request.user.is_superuser,
-        #             },
-        #         ],
-        #     },
-        # ],
+        ],
     },
 }
