@@ -85,7 +85,7 @@ if DEBUG:
     }
 else:
     DATABASES = {
-        'default': dj_database_url.parse(env('DB_URL'))
+        'default': dj_database_url.parse(env('DATABASE_URL'))
     }
 
 # Password validation
