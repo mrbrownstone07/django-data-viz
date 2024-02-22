@@ -1,0 +1,19 @@
+databases:
+  - name: sitedb
+    plan: free
+    databaseName: django-data-viz-db
+    user: root
+
+services:
+  - type: web
+    plan: free
+    name: mysite
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn core.wsgi:application -k uvicorn.workers.UvicornWorker"    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sitedb
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
