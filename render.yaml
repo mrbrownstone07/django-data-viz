@@ -1,7 +1,7 @@
 databases:
   - name: sitedb
     plan: free
-    databaseName: django-data-viz-db
+    databaseName: data_viz_db
     user: root
 
 services:
