@@ -54,8 +54,7 @@ class ProductInOut(models.Model):
             if check < 0:
                 raise ValidationError(f'{self.units} of {self.product} is not available at {self.warehouse}.')            
 
-                
-                
+                             
 class ProductInOutAdmin(ModelAdmin):
     search_fields = ("product", )
     ordering = ("-created", )
