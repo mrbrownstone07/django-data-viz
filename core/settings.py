@@ -129,7 +129,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 UNFOLD = {
     "SITE_TITLE": "Data Visualization Project",
-    "SITE_HEADER": "Data is Prower",
+    "SITE_HEADER": "Management Solution",
     "SITE_URL": "/",
     "STYLES": [
         lambda request: static("css/admin_style.css"),

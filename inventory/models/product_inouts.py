@@ -92,7 +92,7 @@ class ProductInOutAdmin(ModelAdmin):
         return "Not Delivered"
     
     @display(
-        description="Order Type", label={"Inbound": "success",  "Outbound": "danger"}
+        description="Order Type", label={"Inbound": "info",  "Outbound": "warning"}
     )
     def show_order_type(self, obj):
         if obj.order_type == 1:
