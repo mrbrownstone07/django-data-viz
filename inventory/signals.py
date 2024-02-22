@@ -18,7 +18,7 @@ def update_stock(sender, instance, **kwargs):
     if (instance._state.adding 
         and (instance.order_type == OUT_ORDER or order_units_changed)):
         
-        Stock.objects.get(
+        stock = Stock.objects.get(
             product=instance.product,
             warehouse=instance.warehouse,
         )
