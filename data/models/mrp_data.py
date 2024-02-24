@@ -9,17 +9,17 @@ class MarketPriceData(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     price = models.DecimalField(blank=False, null=False, decimal_places=2, max_digits=10)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField()
+    updated = models.DateTimeField()
 
     def __str__(self) -> str:
         return self.product.name + "price at " + self.created.strftime('%m-%d-%Y %H:%M:%S')
 
 
 class MarketPriceDataAdmin(ModelAdmin):
-    list_display = ["id", "price", "product", "created", "updated"]
-    search_fields = ("name", )
-    ordering = ("created", ) 
+    list_display = ["product", "price", "created", "updated"]
+    search_fields = ("product__name", )
+    ordering = ("-created", ) 
 
 
     def has_change_permission(self, request: HttpRequest, obj=None) -> bool:
