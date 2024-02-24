@@ -16,7 +16,7 @@ class Product(models.Model):
         return self.name
     
 class ProductAdmin(ModelAdmin):
-    list_display = ["id", "name", "category", "unit", "created", "updated"]
+    list_display = ["name", "category", "unit", "created", "updated"]
     search_fields = ("name", )
     ordering = ("created", )
 

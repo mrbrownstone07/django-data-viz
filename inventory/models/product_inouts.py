@@ -29,6 +29,8 @@ class ProductInOut(models.Model):
     order_type = models.IntegerField(choices=IN_OUT_FLAG, default=IN_ORDER, verbose_name='Order Type')
     units = models.DecimalField(blank=False, default=0.00, null=False, decimal_places=2, max_digits=10)
     unit_price = models.DecimalField(blank=False, null=False, default=0.00, decimal_places=2, max_digits=10, verbose_name='Unit Price')
+    total_price = models.DecimalField(blank=True, null=True, default=0.00, decimal_places=2, max_digits=10, verbose_name='total Price')
+    discount = models.DecimalField(blank=True, null=True, default=0.00, decimal_places=2, max_digits=10, verbose_name='Discount in Taka')
     order_initiated_on = models.DateTimeField(auto_now_add=True, verbose_name='Order Initiated On')
     order_completed_on = models.DateTimeField(blank=True, null=True, verbose_name='Order Completed On')
     delivered = models.BooleanField(default=False, null=False)
@@ -58,14 +60,14 @@ class ProductInOut(models.Model):
 class ProductInOutAdmin(ModelAdmin):
     search_fields = ("product", )
     ordering = ("-created", )
-    readonly_fields=("order_initiated_on", "order_completed_on")
+    readonly_fields=("order_initiated_on", "order_completed_on", "total_price",)
     list_display = [
         "product", 
         "warehouse", 
         "show_order_type", 
         "show_units_ordered", 
         "unit_price", 
-        "show_total_price",
+        "total_price", 
         "show_delivery_status", 
         "order_initiated_on", 
         "order_completed_on", 
@@ -76,12 +78,6 @@ class ProductInOutAdmin(ModelAdmin):
     )
     def show_units_ordered(self, obj):
         return obj.units, obj.product.unit
-    
-    @display(
-        description="Total Price", label=True
-    )
-    def show_total_price(self, obj):
-        return obj.units * obj.unit_price
     
     @display(
         description="Delivery Status", label={"Delivered": "success",  "Not Delivered": "danger"}
@@ -103,6 +99,8 @@ class ProductInOutAdmin(ModelAdmin):
     def save_model(self, request: HttpRequest, obj: models.Model, form: Form, change) -> None:
         if obj.delivered and not obj.order_completed_on:
             obj.order_completed_on = datetime.now(tz=timezone.get_current_timezone())  
+            
+        obj.total_price = (obj.unit_price * obj.units) - obj.discount
                
         return super().save_model(request, obj, form, change)
     

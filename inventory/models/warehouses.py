@@ -15,6 +15,6 @@ class Warehouse(models.Model):
 
     
 class WarehouseAdmin(ModelAdmin):
-    list_display = ["id", "name", "created", "updated"]
+    list_display = ["name", "created", "updated"]
     search_fields = ("name", )
     ordering = ("created", )  

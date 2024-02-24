@@ -14,7 +14,7 @@ class Category(models.Model):
 
     
 class CategoryAdmin(ModelAdmin):
-    list_display = ["id", "name", "created", "updated"]
+    list_display = ["name", "created", "updated"]
     search_fields = ("name", )
     ordering = ("created", ) 
 
