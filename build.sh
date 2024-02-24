@@ -13,6 +13,7 @@ python manage.py migrate
 
 python manage.py loaddata category.json
 python manage.py loaddata product.json
+python manage.py loaddata warehouse.json
 python manage.py loaddata product_inout.json
 
 python manage.py generate_data
