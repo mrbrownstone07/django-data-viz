@@ -12,7 +12,7 @@ from .categories import Category
 from .warehouses import Warehouse
 from unfold.admin import ModelAdmin
 from unfold.decorators import display
-
+from django.contrib.admin import DateFieldListFilter
 
 IN_ORDER = 1
 OUT_ORDER = 2
@@ -59,6 +59,8 @@ class ProductInOut(models.Model):
                              
 class ProductInOutAdmin(ModelAdmin):
     search_fields = ("product", )
+    list_filter=['warehouse', 'order_type', 'product', ('created', DateFieldListFilter),]
+   
     ordering = ("-created", )
     readonly_fields=("order_initiated_on", "order_completed_on", "total_price",)
     list_display = [
