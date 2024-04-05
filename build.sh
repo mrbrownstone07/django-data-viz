@@ -11,9 +11,9 @@ python manage.py collectstatic --no-input
 # Apply any outstanding database migrations
 python manage.py migrate
 
-python manage.py loaddata category.json
-python manage.py loaddata product.json
-python manage.py loaddata warehouse.json
+# python manage.py loaddata category.json
+# python manage.py loaddata product.json
+# python manage.py loaddata warehouse.json
 # python manage.py loaddata product_inout.json
 
-python manage.py generate_data
+# python manage.py generate_data

@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'siteauth',
     'inventory',
     'data',
+    'orders',
+    'notifications',
 ]
 
 MIDDLEWARE = [
@@ -192,6 +194,24 @@ UNFOLD = {
                         "link": reverse_lazy("admin:inventory_stock_changelist"),
                         "permission": lambda request: request.user.is_staff,                        
                     }
+                ],
+            },
+            {
+                "title": _("Orders"),
+                "separator": False,  # Top border
+                "items": [
+                    {
+                        "title": _("In Orders"),
+                        "icon": "inventory_2",
+                        "link": reverse_lazy("admin:orders_inorder_changelist"),
+                        "permission": lambda request: request.user.is_staff,
+                    },
+                    {
+                        "title": _("Out Orders"),
+                        "icon": "inventory_2",
+                        "link": reverse_lazy("admin:orders_outorder_changelist"),
+                        "permission": lambda request: request.user.is_staff,
+                    },
                 ],
             },
             {
