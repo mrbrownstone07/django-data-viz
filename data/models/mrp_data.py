@@ -21,7 +21,6 @@ class MarketPriceDataAdmin(ModelAdmin):
     search_fields = ("product__name", )
     ordering = ("-created", ) 
 
-
     def has_change_permission(self, request: HttpRequest, obj=None) -> bool:
         if request.user.is_superuser:
             return True
